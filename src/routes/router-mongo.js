@@ -978,7 +978,7 @@ app.post('/user/:id',function(req,res){
 		console.log(req.session.user);
 		res.redirect('/');
 	}   else{
-			AM.db.update({user: req.param('loginid'),
+			AM.update({user: req.param('loginid'),
 						email: req.param('email'),
 						country:'USA',
 						pass:req.param('pass'),
@@ -990,18 +990,23 @@ app.post('/user/:id',function(req,res){
                                                 socketID:[],
 						_id:req.param('user_id'),
 						created_at:''},
-						function(error,accounts){
-					if(accounts){
+						function(error,account){
+					if(account){
+                                            
+                                        AM.getAllRecords(function(e,accounts){
+                                            
+                                        if(!e){
                         req.flash('info','User updated with login '+req.param('loginid'))
                         res.render('admin.jade',{title:'Contact Management and tracking',user:req.session.user.user,
 					     security:req.session.user.seclevel,users:accounts,infomsg:req.flash('info'),divVisible:true});
 						/*Dump the updated users to file
 						  This will be replaced with mongoDB*/
-						dumpUsersArray(function (err) {  if (err) {  return console.log(err);  }});
+						//dumpUsersArray(function (err) {  if (err) {  return console.log(err);  }});
+                                        }});
 					}else{
                      req.flash('error','User not found with login '+user.user)
                      res.render('admin.jade',{title:'Contact Management and tracking',user:req.session.user.user,
-						security:req.session.user.seclevel,users:AM.accounts,msg:req.flash('error'),divVisible:true});
+						security:req.session.user.seclevel,msg:req.flash('error'),divVisible:true});
 				}});
 		}
 });
@@ -1245,7 +1250,7 @@ app.post('/morgage/:id',function(req,res){
 		morgage.created_at=morgage.created_at
 		console.log(morgage);
 		morgageprovider.update(morgage,function(err,docs){
-                    if(docs.escato!='' && req.body.morgissue=='escalated'){
+                    if(docs.escato!=''){
                                AM.db.GetSocketsbyUser(docs.escato,function(e,o){
                                    //console.log('sockets for '+docs[0].escato+'\n\t'+o.toString());
                                    //var socket;

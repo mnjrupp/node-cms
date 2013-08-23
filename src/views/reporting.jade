@@ -20,203 +20,204 @@ block content
     li#queue
      a(href="/queue") Queue
   div.reporting
-   if(typeof(issuetype)!='undefined')
-    p #{issuetype} 
-    table.issuetype
-     tr
-      td.header Type
-      td.header Call back
-      td.header User
-      td.header Escalate to
-      td.header Created on
-      td.header last modified
-      td.header action
-     if(agents)
-     - each agent in agents
-      - var _aStr = JSON.stringify(agent)
-      tr.agentdetail
-       td Agent
-       td #{agent.callbkdte}
-       td #{agent.workedby}
-       td #{agent.escato}
-       td #{agent.created_at}
-       td #{agent.modifydte}
-       td
-        if(issuetype=='resolved')
-         a.aview(href="javascript:displayRprtObj(#{_aStr});") detail
-        else
-         a.aview(href="javascript:jQuery('.object-display').show();jQuery('.agenttab').show();jQuery('.morgtab').hide();jQuery('.insurtab').hide();update_worklist_Id(#{_aStr});") edit
-  
-     if (insurers)
-     - each insurer in insurers
-      - var _aStr = JSON.stringify(insurer)
-      tr.insureddetail
-       td Insurer
-       td #{insurer.callbkdte}
-       td #{insurer.workedby}
-       td #{insurer.escato}
-       td #{insurer.created_at}
-       td #{insurer.modifydte}
-       td
-        if(issuetype=='resolved')
-         a.aview(href="javascript:displayRprtObj(#{_aStr});") detail
-        else
-         a.aview(href="javascript:jQuery('.object-display').show();jQuery('.agenttab').hide();jQuery('.morgtab').hide();jQuery('.insurtab').show();update_insworklist(#{_aStr});") edit
- 
-     if(morgages)
-     - each morgage in morgages
-      - var _aStr = JSON.stringify(morgage)
-      tr.morgdetail
-       td Morg-holder
-       td #{morgage.callbkdte}
-       td #{morgage.workedby}
-       td #{morgage.escato}
-       td #{morgage.created_at}
-       td #{morgage.modifydte}
-       td
-        if(issuetype=='resolved')
-         a.aview(href="javascript:displayRprtObj(#{_aStr});") detail
-        else
-         a.aview(href="javascript:jQuery('.object-display').show();jQuery('.agenttab').hide();jQuery('.morgtab').show();jQuery('.insurtab').hide();update_morgworklist(#{_aStr});") edit  
-   else
-    
-    if(typeof(agents)!='undefined')
-     h1 Today's work-list
-     table.agents 
-      h1.rpt Agents
+   div.rpt-table
+    if(typeof(issuetype)!='undefined')
+     p #{issuetype} 
+     table.issuetype
       tr
-       td.header Agent#
-       td.header Agent 
-       td.header Status
+       td.header Type
        td.header Call back
        td.header User
+       td.header Escalate to
        td.header Created on
-       td.header Modified
-       td.header Action
+       td.header last modified
+       td.header action
+      if(agents)
       - each agent in agents
-       tr.agentdetail
-        td #{agent.agentnum}
-        td #{agent.agentname}
-        td #{agent.issue}
+       - var _aStr = JSON.stringify(agent)
+        tr.agentdetail
+        td Agent
         td #{agent.callbkdte}
         td #{agent.workedby}
+        td #{agent.escato}
         td #{agent.created_at}
         td #{agent.modifydte}
         td
-         a.aview(href="javascript:window.open('/agent_detail/#{agent._id}','agent','width=500,height=400');void(0);") detail
-    if(typeof(insurers)!='undefined')
-     table.insured 
-      h1.rpt Insurers
-      tr
-       td.header First
-       td.header Last 
-       td.header Status
-       td.header Call back
-       td.header User
-       td.header Created on
-       td.header Modified
-       td.header Action
+         if(issuetype=='resolved')
+          a.aview(href="javascript:displayRprtObj(#{_aStr});") detail
+         else
+          a.aview(href="javascript:jQuery('.object-display').show();jQuery('.agenttab').show();jQuery('.morgtab').hide();jQuery('.insurtab').hide();update_worklist_Id(#{_aStr});") edit
+  
+      if (insurers)
       - each insurer in insurers
-        tr.insureddetail
-         td #{insurer.insuredlname}
-         td #{insurer.insuredfname}
-         td #{insurer.issue}
-         td #{insurer.callbkdte}
-         td #{insurer.workedby}
-         td #{insurer.created_at}
-         td #{insurer.modifydte}
-         td
-          a.aview(href="javascript:window.open('/insured_detail/#{insurer._id}','insure','width=500,height=400');void(0);") detail
-    if(typeof(morgages)!='undefined')
-     table#tblmorgages.tablesorter
-      h1.rpt Morgage Holders
-      thead
+       - var _aStr = JSON.stringify(insurer)
+       tr.insureddetail
+        td Insurer
+        td #{insurer.callbkdte}
+        td #{insurer.workedby}
+        td #{insurer.escato}
+        td #{insurer.created_at}
+        td #{insurer.modifydte}
+        td
+         if(issuetype=='resolved')
+          a.aview(href="javascript:displayRprtObj(#{_aStr});") detail
+         else
+          a.aview(href="javascript:jQuery('.object-display').show();jQuery('.agenttab').hide();jQuery('.morgtab').hide();jQuery('.insurtab').show();update_insworklist(#{_aStr});") edit
+ 
+      if(morgages)
+      - each morgage in morgages
+       - var _aStr = JSON.stringify(morgage)
+       tr.morgdetail
+        td Morg-holder
+        td #{morgage.callbkdte}
+        td #{morgage.workedby}
+        td #{morgage.escato}
+        td #{morgage.created_at}
+        td #{morgage.modifydte}
+        td
+         if(issuetype=='resolved')
+          a.aview(href="javascript:displayRprtObj(#{_aStr});") detail
+         else
+          a.aview(href="javascript:jQuery('.object-display').show();jQuery('.agenttab').hide();jQuery('.morgtab').show();jQuery('.insurtab').hide();update_morgworklist(#{_aStr});") edit  
+    else
+    
+     if(typeof(agents)!='undefined')
+      h1 Today's work-list
+      table.agents 
+       h1.rpt Agents
        tr
-        td.header Morgage
-        td.header Account 
+        td.header Agent#
+        td.header Agent 
         td.header Status
         td.header Call back
         td.header User
         td.header Created on
         td.header Modified
         td.header Action
-      |<tbody>
-      - each morgage in morgages
-       tr.morgdetail
-        td #{morgage.morgagename}
-        td #{morgage.acctnum}
-        td #{morgage.issue}
-        td #{morgage.callbkdte}
-        td #{morgage.workedby}
-        td #{morgage.created_at}
-        td #{morgage.modifydte}
-        td
+       - each agent in agents
+        tr.agentdetail
+         td #{agent.agentnum}
+         td #{agent.agentname}
+         td #{agent.issue}
+         td #{agent.callbkdte}
+         td #{agent.workedby}
+         td #{agent.created_at}
+         td #{agent.modifydte}
+         td
+          a.aview(href="javascript:window.open('/agent_detail/#{agent._id}','agent','width=500,height=400');void(0);") detail
+     if(typeof(insurers)!='undefined')
+      table.insured 
+       h1.rpt Insurers
+       tr
+        td.header First
+        td.header Last 
+        td.header Status
+        td.header Call back
+        td.header User
+        td.header Created on
+        td.header Modified
+        td.header Action
+       - each insurer in insurers
+         tr.insureddetail
+          td #{insurer.insuredlname}
+          td #{insurer.insuredfname}
+          td #{insurer.issue}
+          td #{insurer.callbkdte}
+          td #{insurer.workedby}
+          td #{insurer.created_at}
+          td #{insurer.modifydte}
+          td
+           a.aview(href="javascript:window.open('/insured_detail/#{insurer._id}','insure','width=500,height=400');void(0);") detail
+     if(typeof(morgages)!='undefined')
+      table#tblmorgages.tablesorter
+       h1.rpt Morgage Holders
+       thead
+        tr
+         td.header Morgage
+         td.header Account 
+         td.header Status
+         td.header Call back
+         td.header User
+         td.header Created on
+         td.header Modified
+         td.header Action
+       |<tbody>
+       - each morgage in morgages
+        tr.morgdetail
+         td #{morgage.morgagename}
+         td #{morgage.acctnum}
+         td #{morgage.issue}
+         td #{morgage.callbkdte}
+         td #{morgage.workedby}
+         td #{morgage.created_at}
+         td #{morgage.modifydte}
+         td
           a.aview(href="javascript:window.open('/morgage_detail/#{morgage._id}','morgage','width=500,height=400');void(0);") detail
-      |</tbody>
-   if(typeof(reporttype)!='undefined')
-    h1 #{reporttype} Report
-    div.customreport
-     div.criteria
-      form.formcriteria(method="post")
-       p Contact type
-       p
-        span
-         select.selecttype(name="selecttype",size="1")
-          option(value="")
-          option(value="agent") Agent
-          option(value="insurer") Insurer
-          option(value="morgage") Morgage-holder
-          option(value="user") User
-       p Criteria
-       table.criteria
-        tr
-         td.header Field
-         td.header Condition
-         td.header value
-        tr
-         td 
-          select.criteriafield1(name="criteriafield1",size="1")
-           option(value="")
-         td 
-          select.condition1(name="condition1",size="1")
-             option(value="")
-             
-         td 
-          input.criteriavalue1(name="criteriavalue1",type="text")
-          | &nbsp; 
-          input.criteriavalue2(name="criteriavalue2",type="text",style="display:none;")
-  
-       p(style="position:absolute;left:30px;top:200px;")  
-        select.bool1(name="bool1",size="1")
-         option(value="")
-         option(value="and") And
-         option(value="or") Or
-       table.criteria2(style="position:absolute;top:250px;display:none;")
-        tr
-         td.header Field
-         td.header Condition
-         td.header value
-        tr
-         td 
-          select.criteriafield2(name="criteriafield2",size="1")
-           option(value="")
-         td 
-          select.condition2(name="condition2",size="1")
-             option(value="")
-             
-         td 
-          input.criteriavalue3(name="criteriavalue3",type="text")
-          | &nbsp; 
-          input.criteriavalue4(name="criteriavalue4",type="text",style="display:none;")  
-       div.formfooter(style="border:;position:absolute;top:320px")
+       |</tbody>
+    if(typeof(reporttype)!='undefined')
+     h1 #{reporttype} Report
+     div.customreport
+      div.criteria
+       form.formcriteria(method="post")
+        p Contact type
+        p
          span
-          label(for="rptname") Save as 
-          input(type="text",name="rptname")
-          | &nbsp;
-          input(type="submit",value="submit")
-         span(style="margin-left:20px;font-size:1.1em;font-weight:bold;")
-          label(for="rptrun") Run once
-          input.rptrun(type="checkbox",name="rptrun")    
+          select.selecttype(name="selecttype",size="1")
+           option(value="")
+           option(value="agent") Agent
+           option(value="insurer") Insurer
+           option(value="morgage") Morgage-holder
+           option(value="user") User
+        p Criteria
+        table.criteria
+         tr
+          td.header Field
+          td.header Condition
+          td.header value
+         tr
+          td 
+           select.criteriafield1(name="criteriafield1",size="1")
+            option(value="")
+          td 
+           select.condition1(name="condition1",size="1")
+             option(value="")
+             
+          td 
+           input.criteriavalue1(name="criteriavalue1",type="text")
+           | &nbsp; 
+           input.criteriavalue2(name="criteriavalue2",type="text",style="display:none;")
+  
+        p(style="position:absolute;left:30px;top:200px;")  
+         select.bool1(name="bool1",size="1")
+          option(value="")
+          option(value="and") And
+          option(value="or") Or
+        table.criteria2(style="position:absolute;top:250px;display:none;")
+         tr
+          td.header Field
+          td.header Condition
+          td.header value
+         tr
+          td 
+           select.criteriafield2(name="criteriafield2",size="1")
+            option(value="")
+          td 
+           select.condition2(name="condition2",size="1")
+             option(value="")
+             
+          td 
+           input.criteriavalue3(name="criteriavalue3",type="text")
+           | &nbsp; 
+           input.criteriavalue4(name="criteriavalue4",type="text",style="display:none;")  
+        div.formfooter(style="border:;position:absolute;top:320px")
+          span
+           label(for="rptname") Save as 
+           input(type="text",name="rptname")
+           | &nbsp;
+           input(type="submit",value="submit")
+          span(style="margin-left:20px;font-size:1.1em;font-weight:bold;")
+           label(for="rptrun") Run once
+           input.rptrun(type="checkbox",name="rptrun")    
  include quick-links-reporting  
  include object-show
  include footer

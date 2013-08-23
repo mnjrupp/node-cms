@@ -120,7 +120,7 @@ morgageProvider.prototype.update=function(morgage,callback){
      }
 }
  this.dummyData[this.dummyData.length]=morgage;
-   callback(null,this.dummyData);
+   callback(null,morgage);
 };
 morgageProvider.prototype.save=function(morgages,callback){
  var morgage=null;

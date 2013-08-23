@@ -123,7 +123,7 @@ AgentProvider.prototype.update=function(agent,callback){
      }
 }
  this.dummyData[this.dummyData.length]=agent;
-   callback(null,this.dummyData);
+   callback(null,agent);
 };
 AgentProvider.prototype.save=function(agents,callback){
  var agent=null;
@@ -143,6 +143,7 @@ AgentProvider.prototype.save=function(agents,callback){
 		// }
 		this.dummyData[this.dummyData.length]=agent;
 		}
+                console.log(' FROM AGENTPROVIDER.SAVE METHOD\n'+JSON.stringify(agents));
 	callback(null,agents);
 	};
 	/* bootstrap with dummy data*/

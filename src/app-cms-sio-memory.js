@@ -3,6 +3,7 @@
  */
 
 var express = require('express')
+  , app     = express()
   , routes  = require('./routes')
   , user    = require('./routes/user')
   , http    = require('http')
@@ -11,11 +12,16 @@ var express = require('express')
   , cronJob = require('cron').CronJob
   , fs      = require('fs')
   , csv     = require('csv')
-  , moment  = require('moment');
+  , moment  = require('moment')
+  ,MemoryStore = express.session.MemoryStore
+  ,server=require('http').createServer(app)
+  ,io=require('socket.io').listen(server)
+  ,sessionStore = new MemoryStore()
+  ,sessionSecret= 'super-duper-secret-secret';
 
 
 //var EM = require('./public/javascripts/modules/email-dispatcher');
-var app = express();
+//var app = express();
    //assigning session to local res must happen before configure
 	// app.use(function(req, res, next) {
 	// res.user = req.session.user;
@@ -30,7 +36,8 @@ app.configure(function(){
   app.use(express.logger('dev'));
   app.use(express.bodyParser({uploadDir:'./uploads'}));
   app.use(express.cookieParser());
-  app.use(express.session({ secret: 'super-duper-secret-secret',cookie: { maxAge: null } }));
+  app.use(express.session({ store:sessionStore,secret: sessionSecret,
+      key:'express.sid',cookie: { maxAge: null } }));
   app.use(flash());
   app.use(express.methodOverride());
   app.use(app.router);
@@ -39,17 +46,21 @@ app.configure(function(){
  
 });
 
- 
+server.listen(3000, function(){
+  console.log('Express server listening on port 3000');
+});
 app.configure('development', function(){
   app.use(express.errorHandler({dumpExceptions:true,showStack:true}));
 });
-
-http.createServer(app).listen(app.get('port'), function(){
+/* Where routes are found*/
+var Router = require('./routes/router') 
+    ,r=new Router(app,io,sessionStore,sessionSecret);
+/*http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
-});
+});*/
 
-var concron = new cronJob('00 00,07,10,20,30,35,40,45,50 * * * *', function(){
+/*var concron = new cronJob('00 00,07,10,20,30,35,40,45,50 * * * *', function(){
     console.log(new Date());
-    dumpMemoryArrays(function(e,o){
+  r.dumpMemoryArrays(function(e,o){
 	});
-}, null, true);
+}, null, true);*/

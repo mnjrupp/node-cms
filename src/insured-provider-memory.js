@@ -120,7 +120,7 @@ insuredProvider.prototype.update=function(insured,callback){
      }
 }
  this.dummyData[this.dummyData.length]=insured;
-   callback(null,this.dummyData);
+   callback(null,insured);
 };
 insuredProvider.prototype.save=function(insureds,callback){
  var insured=null;

@@ -1,0 +1,26 @@
+doctype 5
+html
+  head
+    title= title
+    meta(http-equiv="Cache-Control",content="no-cache")
+    meta(http-equiv="pragma",content="no-cache")
+    meta(http-equiv="Expires",content="Mon,25 Jul 2011 11:12:01 GMT")
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css')
+    //script(src='http://code.jquery.com/jquery-1.8.2.js')
+    script(src='/socket.io/socket.io.js')
+    
+    
+    script
+     var socket=io.connect('http://qbe-31cwhq1:3000'); 
+      
+       socket.on('queue',function(msg){
+         var n=noty({text: msg,type:'information',dismissQueue:true,layout:'bottomRight',theme: 'defaultTheme'});
+           console.log(msg);
+            
+            });
+   body
+    
+    iframe#lowerframe.lowerframe(frameBorder='0',name='lowerfrm',src='/user-home')
+    
+ include footer         
