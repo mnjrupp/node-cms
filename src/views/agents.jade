@@ -1,0 +1,504 @@
+//index-sub.jade
+extends layout
+
+block content
+ div.maintab
+  ul#nav
+   li#liagent.cur
+    a(href="#") Agents
+   li#insur.insur
+    strong
+     a(href="#") Insured
+   li#morgage.morgage
+    a(href="#") Morgage Holder
+   if security==9
+    li#lireport.lireport
+     a(href="/reporting") Reporting
+    li#liadm.liadm 
+     a(href="/admin") Admin
+   if security>=8
+    li#queue
+     a(href="/queue") Queue
+  div.agenttab
+   form.form1a(method="post")
+    div.div-1
+     p
+      label(for="agenttype") Contact type:&nbsp;
+       select#agenttype.agenttype(name="agenttype",size=1)
+        option(value=0) phone
+        if security>0
+         option(value=1) email
+        if security>1
+         option(value=2) chat
+     p
+      label(for="agentcontact") Contact:
+       input#agentcont.agentcont(type="text",name="agentcontact")
+      label(for="callnum") &nbsp;Contact phone:&nbsp;
+       input#callnum(type="text",name="callnum")
+     P
+      label(for="acctnum") Account:
+       input#acctnum(type="text",name="acctnum")
+       input#_id._id(type="hidden",name="_id",value="")
+      label(for="policynum") &nbsp;Policy:
+       input#policynum.policynum(type="text",name="policynum")
+      label(for="brand") &nbsp;Brand:
+       select#brand(name="brand",size="1")
+        option(value="")
+        option(value="Agri") Agri
+        option(value="FUI") FUI
+        option(value="GC") GC
+        option(value="NP") NP
+        option(value="SR") SR
+        option(value="UNI") UNI
+     P
+      label(for="agentnum") 
+       |Agent#:
+       |!{space}!{space}!{space}
+       input#agentnum(type="text",name="agentnum",size="5")
+      label(for="agentname") &nbsp;Agent:
+       input#agentname(type="text",name="agentname",size="40")
+     
+     P
+      label.lbl(for="addrstreet") Address:&nbsp;
+       input#addrstreet(type="text",name="addrstreet",size="40")
+     P
+      label(for="addrcity") &nbsp;&nbsp;&nbsp;City: &nbsp;&nbsp;
+       input#addrcity(type="text",name="addrcity")
+      label(for="addrstate") &nbsp;State:&nbsp;
+       input#addrstate(type="text",name="addrstate",size="3")
+      label(for="addrzip") &nbsp;Zip:&nbsp;
+       input#addrzip(type="text",name="addrzip",size="6")
+     P
+      label(for="agentphone") &nbsp;Phone:
+       input#agentphone(type="text",name="agentphone")
+      label(for="callbkdte") &nbsp;Callback date/time:
+       input#callbkdte(type="text",name="callbkdte",size="10")
+      label(for="callbktime") :
+       select#callbktime(name="callbktime",size="1")
+        option(value="00:00")
+        option(value="08:00") 8:00 AM
+        option(value="08:30") 8:30 AM
+        option(value="09:00") 9:00 AM
+        option(value="09:30") 9:30 AM
+        option(value="10:00") 10:00 AM
+        option(value="10:30") 10:30 AM
+        option(value="11:00") 11:00 AM
+        option(value="11:30") 11:30 AM
+        option(value="12:00") 12:00 PM
+        option(value="12:30") 12:30 PM
+        option(value="13:00") 1:00 PM
+        option(value="13:30") 1:30 PM
+        option(value="14:00") 2:00 PM
+        option(value="14:30") 2:30 PM
+        option(value="15:00") 3:00 PM
+        option(value="15:30") 3:30 PM
+        option(value="16:00") 4:00 PM
+        option(value="16:30") 4:30 PM
+        option(value="17:00") 5:00 PM
+        option(value="17:30") 5:30 PM
+        option(value="18:00") 6:00 PM
+        option(value="18:30") 6:30 PM
+        option(value="19:00") 7:00 PM
+     P
+      |Status of Issue
+      label.lblcreatedte(for="createdte") Create date &nbsp;
+      input#createdte.createdte(type="text",name="createdte",size="27")
+     P
+      span
+       input#issue.issue(type="radio",value="resolved",name="issue")
+       |Resolved
+       input#issue.issue(type="radio",value="open",name="issue",checked="checked")
+       |Open
+       input#issue.issue(type="radio",value="escalated",name="issue")
+       |Escalated
+      
+     P.cmnt
+      span(style="margin-left:10px")
+       label(for="agentescato") Escalate to: &nbsp;
+        select#agentescato.agentescato(name="agentescato",size="1")
+         option(value="")
+         - each user in users
+          if (user.seclevel==8)
+            option(value=user.user) #{user.user}
+       - var space = "&nbsp;&nbsp;&nbsp;&nbsp;"
+       span(style="margin-left:60px")
+        button#agentcopy.agentcopy Copy
+        |!{space}
+       button.submitted#submitted(type="button",onClick="javascript:submitInit('form1a');") Submit
+       |!{space}
+       button.updated#updated(type="button",onClick="javascript:submitUpdate('form1a');") Update
+       |!{space}
+       button.canceled(type="reset") Reset
+       |!{space}
+       button.search(type="button",onClick="javascript:submitSearch('form1a');") Search
+     P.cmnt
+       textarea#agentcomment(name="agentcomment",rows="6",cols="64") Comments: 
+    div.div-2
+    
+     p 
+      |!{space}
+      |Work Completed
+     p
+      input#initcall(type="checkbox",name="initcall",checked=false)
+      |First Call
+     p
+      //phonepaymnts:'No',paystatreq:'No',morgcalls:'No',eftquestions:'No',
+      //  endorsements:'No',cancpolreq:'No',reinst:'No',pifdscnt:'No',pymntagrreqs:'No',audspreadreq:'No',misc:'No'
+     p 
+       input#phonepaymnts(type="checkbox",checked=false,name="phonepaymnts")
+       | Phone payments 
+     p 
+       input#paystatreq(type="checkbox",checked=false,name="paystatreq")
+       | Payment Status request
+     p 
+       input#morgcalls(type="checkbox",checked=false,name="morgcalls")
+       Mortgage Calls/Issues
+     p 
+       input#eftquestions(type="checkbox",checked=false,name="eftquestions")
+       |EFT Questions
+     p 
+       input#endorsements(type="checkbox",checked=false,name="endorsements")
+       |Endorsements(explain/ratings)
+     p 
+       input#cancpolreq(type="checkbox",checked=false,name="cancpolreq")
+       |Cancelled Policy requests
+     p 
+       input#reinst(type="checkbox",checked=false,name="reinst")
+       |Reinstatement considered
+     p 
+       input#pifdscnt(type="checkbox",checked=false,name="pifdscnt")
+       | Pif Discounts
+     p 
+       input#pymntagrreqs(type="checkbox",checked=false,name="pymntagrreqs")
+       |Payment Agreement/Redistribute
+     p 
+       input#audspreadreq(type="checkbox",checked=false,name="audspreadreq")
+       |Audit Spread Requests
+     p 
+       input#misc(type="checkbox",checked=false,name="misc")
+       |Misc
+     p
+      textarea#miscdesc.miscdesc(name="miscdesc",rows="4",cols="25")
+  // Hidden Insurance DIV Starts here
+  div.insurtab
+   form.form1b(method="post")
+    div.div-1b
+     p
+      label(for="instype") Contact type:&nbsp;
+       select#instype.instype(name="instype",size=1)
+        option(value=0) phone
+        if security>0
+         option(value=1) email
+        if security>1
+         option(value=2) chat
+     p
+      label(for="inscontact") Contact:&nbsp;
+       input#inscontact.inscontact(type="text",name="inscontact")
+      label(for="inscallnum") &nbsp;Contact phone:&nbsp;
+       input#inscallnum(type="text",name="inscallnum")
+      
+     P
+      label(for="insacctnum") Account:&nbsp;
+       input#insacctnum.insacctnum(type="text",name="insacctnum")
+       input#_id.ins_id(type="hidden",name="ins_id",value="")
+      label(for="inspolicynum") &nbsp;Policy:&nbsp;
+       input#inspolicynum.inspolicynum(type="text",name="inspolicynum")
+      label(for="insbrand") &nbsp;Brand:&nbsp;
+       select#insbrand(name="insbrand",size="1")
+        option(value="")
+        option(value="Agri") Agri
+        option(value="FUI") FUI
+        option(value="GC") GC
+        option(value="NP") NP
+        option(value="SR") SR
+        option(value="UNI") UNI
+     P
+      label(for="insuredfname") &nbsp;&nbsp;FirstN:&nbsp;&nbsp;
+       input#insuredfname(type="text",name="insuredfname")
+      label(for="insuredlname") &nbsp;LastN:&nbsp;&nbsp;
+       input#insuredlname(type="text",name="insuredlname")
+      
+     P
+      label(for="insaddrstreet") Address:
+       input#insaddrstreet(type="text",name="insaddrstreet",size="40")
+     P
+      label(for="insaddrcity") &nbsp;&nbsp;&nbsp;&nbsp;City:&nbsp;&nbsp;&nbsp;
+       input#insaddrcity(type="text",name="insaddrcity")
+      label(for="insaddrstate") &nbsp;State:&nbsp;
+       input#insaddrstate(type="text",name="insaddrstate",size="3")
+      label(for="insaddrzip") &nbsp;Zip:&nbsp;
+       input#insaddrzip(type="text",name="insaddrzip",size="6")
+     P
+      label(for="insuredphone") Phone:&nbsp;&nbsp;
+       input#insuredphone(type="text",name="insuredphone")
+      label(for="inscallbkdte") &nbsp;Callback date/time:
+       input#inscallbkdte(type="text",name="inscallbkdte",size="10")
+      label(for="inscallbktime") :
+       select#inscallbktime(name="inscallbktime",size="1")
+        option(value="00:00")
+        option(value="08:00") 8:00 AM
+        option(value="08:30") 8:30 AM
+        option(value="09:00") 9:00 AM
+        option(value="09:30") 9:30 AM
+        option(value="10:00") 10:00 AM
+        option(value="10:30") 10:30 AM
+        option(value="11:00") 11:00 AM
+        option(value="11:30") 11:30 AM
+        option(value="12:00") 12:00 PM
+        option(value="12:30") 12:30 PM
+        option(value="13:00") 1:00 PM
+        option(value="13:30") 1:30 PM
+        option(value="14:00") 2:00 PM
+        option(value="14:30") 2:30 PM
+        option(value="15:00") 3:00 PM
+        option(value="15:30") 3:30 PM
+        option(value="16:00") 4:00 PM
+        option(value="16:30") 4:30 PM
+        option(value="17:00") 5:00 PM
+        option(value="17:30") 5:30 PM
+        option(value="18:00") 6:00 PM
+        option(value="18:30") 6:30 PM
+        option(value="19:00") 7:00 PM
+     P
+      |Status of Issue
+      label.lblcreatedte(for="inscreatedte") Create date &nbsp;
+      input#inscreatedte.inscreatedte(type="text",name="inscreatedte",size="27")
+     P
+      input#insissue(type="radio",value="resolved",name="insissue")
+      |Resolved
+      input#insissue(type="radio",value="open",name="insissue",checked="checked")
+      |Open
+      input#insissue(type="radio",value="escalated",name="insissue")
+      |Escalated
+     P.cmnt
+       span(style="margin-left:10px")
+        label(for="insescato") Escalate to: &nbsp;
+         select#insescato.insescato(name="insescato",size="1")
+          option(value="")
+          - each user in users
+           if (user.seclevel==8)
+             option(value=user.user) #{user.user}
+    
+       span(style="margin-left:60px")
+        button#inscopy.inscopy Copy
+        |!{space}
+        button.inssubmitted#inssubmitted(type="button",onClick="javascript:submitInit('form1b');") Submit
+        |!{space}
+        button.insupdated#insupdated(type="button",onClick="javascript:submitUpdate('form1b');") Update
+        |!{space}
+        button.inscanceled(type="reset") Reset
+        |!{space}
+        button.search(type="button",onClick="javascript:submitSearch('form1b');") Search
+     P.cmnt
+       textarea#inscomment(name="inscomment",rows="6",cols="64") Comments:
+    div.div-2b
+     
+     p 
+      |!{space}
+      |Work Completed
+     p
+      input#insinitcall(type="checkbox",name="insinitcall",checked=false)
+      |First Call
+     p
+      //phonepaymnts:'No',paystatreq:'No',morgcalls:'No',eftquestions:'No',
+      //  endorsements:'No',cancpolreq:'No',reinst:'No',pifdscnt:'No',pymntagrreqs:'No',audspreadreq:'No',misc:'No'
+     p 
+       input#insphonepaymnts(type="checkbox",checked=false,name="insphonepaymnts")
+       | Phone payments 
+     p 
+       input#inspaystatreq(type="checkbox",checked=false,name="inspaystatreq")
+       | Payment Status request
+     p 
+       input#insmorgcalls(type="checkbox",checked=false,name="insmorgcalls")
+       Mortgage Calls/Issues
+     p 
+       input#inseftquestions(type="checkbox",checked=false,name="inseftquestions")
+       |EFT Questions
+     p 
+       input#insendorsements(type="checkbox",checked=false,name="insendorsements")
+       |Endorsements(explain/ratings)
+     p 
+       input#inscancpolreq(type="checkbox",checked=false,name="inscancpolreq")
+       |Cancelled Policy requests
+     p 
+       input#insreinst(type="checkbox",checked=false,name="insreinst")
+       |Reinstatement considered
+     p 
+       input#inspifdscnt(type="checkbox",checked=false,name="inspifdscnt")
+       | Pif Discounts
+     p 
+       input#inspymntagrreqs(type="checkbox",checked=false,name="inspymntagrreqs")
+       |Payment Agreement/Redistribute
+     p 
+       input#insaudspreadreq(type="checkbox",checked=false,name="insaudspreadreq")
+       |Audit Spread Requests
+     p 
+       input#insmisc(type="checkbox",checked=false,name="insmisc")
+       |Misc
+     p
+      textarea.insmiscdesc(name="insmiscdesc",rows="4",cols="25")     
+     
+  // Hidden Morgage DIV Starts here
+  div.morgtab
+   form.form1c(method="post")
+    div.div-1c
+     p
+      label(for="morgtype") Contact type:&nbsp;
+       select#morgtype.morgtype(name="morgtype",size=1)
+        option(value=0) phone
+        if security>0
+         option(value=1) email
+        if security>1
+         option(value=2) chat
+     p
+      label(for="morgcontact") Contact:&nbsp;
+       input#morgcont.morgcont(type="text",name="morgcontact")
+      label(for="morgcallnum") &nbsp;Contact phone:&nbsp;
+       input#morgcallnum(type="text",name="morgcallnum")
+     P
+      label(for="morgacctnum") Account:&nbsp;
+       input#morgacctnum.morgacctnum(type="text",name="morgacctnum")
+       input#morg_id.morg_id(type="hidden",name="morg_id",value="")
+      label(for="morgpolicynum") &nbsp;Policy:&nbsp;
+       input#morgpolicynum.morgpolicynum(type="text",name="morgpolicynum")
+      label(for="morgbrand") &nbsp;Brand:&nbsp;
+       select#morgbrand(name="morgbrand",size="1")
+        option(value="")
+        option(value="Agri") Agri
+        option(value="FUI") FUI
+        option(value="GC") GC
+        option(value="NP") NP
+        option(value="SR") SR
+        option(value="UNI") UNI
+     P
+      span Morgage
+     P
+      label(for="morgname") &nbsp;&nbsp;Name:&nbsp;&nbsp;
+       input#morgname(type="text",name="morgname")
+      label(for="morgphone") &nbsp;Phone:&nbsp;
+       input#agentphone(type="text",name="morgphone")
+     P
+      label(for="morgaddrstreet") Address:
+       input#morgaddrstreet(type="text",name="morgaddrstreet",size="40")
+     P
+      label(for="morgaddrcity") &nbsp;&nbsp;&nbsp;&nbsp;City:&nbsp;&nbsp;&nbsp;
+       input#morgaddrcity(type="text",name="morgaddrcity")
+      label(for="morgaddrstate") State:
+       input#morgaddrstate(type="text",name="morgaddrstate",size="3")
+      label(for="morgaddrzip") Zip:
+       input#morgaddrzip(type="text",name="morgaddrzip",size="6")
+     
+     P
+      Span.pspan
+       label(for="morgcallbkdte") &nbsp;Callback date/time:
+        input#morgcallbkdte(type="text",name="morgcallbkdte",size="10")
+       label(for="morgcallbktime") :
+        select#morgcallbktime(name="morgcallbktime",size="1")
+         option(value="00:00")
+         option(value="08:00") 8:00 AM
+         option(value="08:30") 8:30 AM
+         option(value="09:00") 9:00 AM
+         option(value="09:30") 9:30 AM
+         option(value="10:00") 10:00 AM
+         option(value="10:30") 10:30 AM
+         option(value="11:00") 11:00 AM
+         option(value="11:30") 11:30 AM
+         option(value="12:00") 12:00 PM
+         option(value="12:30") 12:30 PM
+         option(value="13:00") 1:00 PM
+         option(value="13:30") 1:30 PM
+         option(value="14:00") 2:00 PM
+         option(value="14:30") 2:30 PM
+         option(value="15:00") 3:00 PM
+         option(value="15:30") 3:30 PM
+         option(value="16:00") 4:00 PM
+         option(value="16:30") 4:30 PM
+         option(value="17:00") 5:00 PM
+         option(value="17:30") 5:30 PM
+         option(value="18:00") 6:00 PM
+         option(value="18:30") 6:30 PM
+         option(value="19:00") 7:00 PM
+     P
+      |Status of Issue
+      label.lblcreatedte(for="morgcreatedte") Create date &nbsp;
+      input#morgcreatedte.morgcreatedte(type="text",name="morgcreatedte",size="27")
+     P
+      input#morgissue.morgissue(type="radio",value="resolved",name="morgissue")
+      |Resolved
+      input#morgissue.morgissue(type="radio",value="open",name="morgissue",checked="checked")
+      |Open
+      input#morgissue.morgissue(type="radio",value="escalated",name="morgissue")
+      |Escalated
+      - var space = "&nbsp;&nbsp;&nbsp;&nbsp;"
+      |!{space}
+      |!{space}
+
+     P.cmnt
+       span(style="margin-left:10px")
+        label(for="morgescato") Escalate to: &nbsp;
+         select#morgescato.morgescato(name="morgescato",size="1")
+          option(value="")
+          - each user in users
+           if (user.seclevel==8)
+             option(value=user.user) #{user.user}
+       span(style="margin-left:60px")
+        button#morgcopy.morgcopy Copy
+        |!{space}
+        button.morgsubmitted#morgsubmitted(type="button",onClick="javascript:submitInit('form1c');") Submit
+        |!{space}
+        button.morgupdated#morgupdated(type="button",onClick="javascript:submitUpdate('form1c');") Update
+        |!{space}
+        button.qmorgcanceled(type="reset") Reset
+        |!{space}
+        button.search(type="button",onClick="javascript:submitSearch('form1c');") Search
+     P.cmnt
+       textarea#morgcomment.morgcomment(name="morgcomment",rows="6",cols="64") Comments:
+    div.div-2c
+   
+     p 
+      |!{space}
+      |Work Completed
+     p
+      input#morginitcall(type="checkbox",name="morginitcall",checked=false)
+      |First Call
+     p
+      //phonepaymnts:'No',paystatreq:'No',morgcalls:'No',eftquestions:'No',
+      //  endorsements:'No',cancpolreq:'No',reinst:'No',pifdscnt:'No',pymntagrreqs:'No',audspreadreq:'No',misc:'No'
+     p 
+       input#morgphonepaymnts(type="checkbox",checked=false,name="morgphonepaymnts")
+       | Phone payments 
+     p 
+       input#morgpaystatreq(type="checkbox",checked=false,name="morgpaystatreq")
+       | Payment Status request
+     p 
+       input#morgcalls.morgmorgcalls(type="checkbox",checked=false,name="morgmorgcalls")
+       | Mortgage Calls/Issues
+     p 
+       input#morgeftquestions(type="checkbox",checked=false,name="morgeftquestions")
+       |EFT Questions
+     p 
+       input#morgendorsements(type="checkbox",checked=false,name="morgendorsements")
+       |Endorsements(explain/ratings)
+     p 
+       input#morgcancpolreq(type="checkbox",checked=false,name="morgcancpolreq")
+       |Cancelled Policy requests
+     p 
+       input#morgreinst(type="checkbox",checked=false,name="morgreinst")
+       |Reinstatement considered
+     p 
+       input#morgpifdscnt(type="checkbox",checked=false,name="morgpifdscnt")
+       | Pif Discounts
+     p 
+       input#morgpymntagrreqs(type="checkbox",checked=false,name="morgpymntagrreqs")
+       |Payment Agreement/Redistribute
+     p 
+       input#morgaudspreadreq(type="checkbox",checked=false,name="morgaudspreadreq")
+       |Audit Spread Requests
+     p 
+       input#morgmisc(type="checkbox",checked=false,name="morgmisc")
+       |Misc
+     p
+      textarea#morgmiscdesc.morgmiscdesc(name="morgmiscdesc",rows="4",cols="25")    
+  include work-list
+  include footer
+   

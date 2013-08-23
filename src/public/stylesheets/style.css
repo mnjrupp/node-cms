@@ -1,0 +1,675 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+div {
+  border: 0px solid #999;
+}
+a {
+  color: #00b7ff;
+}
+h1 {
+  font-size: 16px;
+}
+nav {
+  position: absolute;
+  top: 5px;
+  left: 350px;
+}
+.maintab {
+  width: 930px;
+  background: #fff;
+  border: 0px solid #999;
+  height: 600px;
+}
+.insuredtab {
+  display: none;
+  position: absolute;
+  top: 120px;
+  left: 30px;
+  width: width-20;
+  height: 600px;
+background
+}
+.morgtab {
+  display: none;
+  position: absolute;
+  top: 120px;
+  left: 15px;
+  width: width-20;
+  height: 400px;
+background
+}
+.agenttab,
+.reporting,
+.admin {
+  display: block;
+  position: absolute;
+  top: 120px;
+  left: 15px;
+  width: width-20;
+  height: 400px;
+background
+}
+.reporting,
+.admin {
+  width: 1100px;
+}
+.insurtab {
+  display: none;
+  position: absolute;
+  top: 120px;
+  left: 15px;
+  width: width-20;
+  height: 400px;
+  border: 1px;
+background
+}
+.qagenttab,
+.qinsurtab,
+.qmorgtab {
+  display: none;
+  position: absolute;
+  top: 120px;
+  left: 30px;
+  width: width-20;
+  height: 600px;
+background
+}
+#nav {
+  clear: both;
+  font-weight: bold;
+  color: #666;
+  float: left;
+  list-style-type: none;
+  background: url("/images/navshadow.gif") no-repeat 8px 100% #fff;
+  padding-bottom: 21px;
+}
+#nav li {
+  list-style-type: none;
+  float: left;
+  margin: 0 0 0 4px;
+  padding: 0 0 0 10px;
+  border-bottom: 1px solid #999;
+  background: url("/images/tabgrey.gif") #c0c0c0 top left no-repeat;
+}
+#nav li:hover {
+  background: url("/images/tabblue.gif") #3375b2 top left no-repeat;
+  border-bottom: 1px solid #036;
+}
+#nav li.cur,
+#nav li.over {
+  background: url("/images/tabblue.gif") #3375b2 top left no-repeat;
+  border-bottom: 1px solid #036;
+}
+#nav a {
+  color: #666;
+  background: url("/images/tabgrey.gif") transparent top right no-repeat;
+  display: block;
+  padding: 0 10px 0 0;
+}
+#nav li stong,
+ul#nav li.cur a,
+ul#nav li.over a,
+ul#nav li:hover a {
+  display: block;
+  color: #fff;
+  padding: 0 10px 0 0;
+  text-decoration: none;
+  background: url("/images/tabblue.gif") transparent top right no-repeat;
+}
+.def-nav {
+  position: relative;
+  width: 400px;
+  top: 0px;
+  left: 0px;
+  list-style-type: none;
+  background: url("/images/navshadow.gif") no-repeat 8px 100% #fff;
+  padding-bottom: 21px;
+}
+.def-nav li {
+  list-style-type: none;
+  float: left;
+  margin: 0 0 0 4px;
+  padding: 0 0 0 10px;
+}
+.def-nav li a {
+  color: #666;
+  display: block;
+  padding: 0 10px 0 0;
+}
+.div-1,
+.div-1b,
+.div-1c {
+  float: left;
+  width: 550px;
+  height: 500px;
+  padding-left: 8px;
+}
+.div-2,
+.div-2b,
+.div-2c {
+  position: absolute;
+  left: 570px;
+  top: 20px;
+background
+  border: 0px;
+  margin-left: 8px;
+  width: 250px;
+  height: 378px;
+}
+.div-2 p,
+.div-2b p,
+.div-2c p {
+  padding: 1 0 0 0;
+  margin: 0 0 0 2px;
+}
+.pheader {
+  background: url("/images/tabgrey.gif") transparent bottom right no-repeat;
+}
+.pfooter {
+  background: url("/images/tabgrey.gif") transparent bottom right no-repeat;
+}
+.cmnt {
+  margin-left: 0px;
+  text-align: left;
+  border: 0px solid #000;
+}
+.worklist {
+  position: absolute;
+  top: 100px;
+  left: 850px;
+  width: 350px;
+  height: 500px;
+  border: 0px inset #cdc;
+}
+.queuelist {
+  position: absolute;
+  top: 150px;
+  left: 850px;
+  width: 450px;
+  height: 500px;
+  border: 0px solid #cdc;
+}
+.queuelist .qagents,
+.queuelist .qinsured,
+.queuelist .qmorgages {
+  width: 100%;
+  height: 33%;
+background
+}
+.queuelist .qagents table,
+.queuelist .qinsured table,
+.queuelist .qmorgages table {
+  width: 100%;
+background
+}
+input.issue {
+  background: rgba(238,238,238,0.933);
+}
+.updated,
+.insupdated,
+.morgupdated {
+  display: none;
+}
+.submitted,
+.inssubmitted,
+.morgsubmitted {
+  display: inline;
+}
+.agent,
+.insurer,
+.pmorg {
+  font-size: 10px;
+  width: 200px;
+  background: url("/images/septitlenav.png") repeat-x 0px 100%;
+  padding-left: 4px;
+}
+.agent a,
+.insurer a,
+.pmorg a {
+  text-decoration: none;
+}
+.insureddiv {
+  visibility: visible;
+}
+.home {
+  position: absolute;
+  left: 200px;
+  top: 150px;
+  border: 1px dotted;
+  width: 400px;
+  height: 300px;
+  background-color: #ffc;
+  padding-top: 24px;
+  text-align: center;
+}
+.titlenav {
+  border: 0px solid #fff;
+  border-radius: 4px;
+  padding-bottom: 0px;
+  padding-left: 11px;
+  padding-right: 0px;
+  width: 200px;
+  background: url("/images/bg.gif") repeat-x 0px 100%;
+  height: 20px;
+  color: rgba(34,238,85,0.467) 7;
+  font-size: 1em;
+  padding-top: 8px;
+  cursor: pointer;
+}
+.navimg {
+  padding-right: 20px;
+  float: right;
+  border: 0px;
+}
+.navimg:hover {
+  cursor: hand;
+}
+table {
+  background-color: #fafafa;
+  border: 1px #000 solid;
+  border-collapse: collapse;
+  border-spacing: 0px;
+  float: left;
+  width: 800px;
+  margin-bottom: 4px;
+}
+table.users {
+  background-color: #fafafa;
+  border: 1px #000 solid;
+  border-collapse: collapse;
+  border-spacing: 0px;
+  float: left;
+  width: 600px;
+  margin-top: 24px;
+  margin-bottom: 4px;
+}
+table.history,
+.agentDtl {
+  background-color: #fafafa;
+  border: 1px #000 solid;
+  border-collapse: collapse;
+  border-spacing: 0px;
+  float: left;
+  width: 100%;
+  height: 80%;
+  margin-bottom: 4px;
+}
+td.header {
+  background-color: #9cc;
+  border: 1px #000 solid;
+  font-family: Verdana;
+  font-weight: bold;
+  font-size: 10px;
+  color: #404040;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 8px;
+  padding-right: 8px;
+  white-space: nowrap;
+}
+td.hheader {
+  background-color: #9cc;
+  border: 1px #000 solid;
+  font-family: Verdana;
+  font-weight: bold;
+  font-size: 10px;
+  color: #404040;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 4px;
+  height: 25px;
+  white-space: nowrap;
+}
+td.hheader2 {
+  background-color: #99cddd;
+  border: 1px #000 solid;
+  font-family: Verdana;
+  font-weight: bold;
+  font-size: 10px;
+  color: #404040;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 1px;
+  padding-right: 0px;
+  white-space: nowrap;
+  width: 20%;
+}
+td {
+  border-bottom: 1px #69c dotted;
+  text-align: center;
+  font-family: Verdana sans-serif Arial;
+  font-weight: normal;
+  font-size: 0.9em;
+  color: #404040;
+  background-color: #fafafa;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 2px;
+  padding-right: 2px;
+  white-space: nowrap;
+}
+td.qheader {
+  background-color: #9cc;
+  border: 1px #000 solid;
+  font-family: Verdana;
+  font-weight: bold;
+  font-size: 10px;
+  color: #404040;
+  padding: 0 0 0 0;
+  height: 15px;
+  white-space: nowrap;
+}
+.rptdiv {
+  position: relative;
+  background-color: #66f;
+  border: 1px #000 solid;
+  font-family: Verdana;
+  font-weight: bold;
+  font-size: 10px;
+  color: #404040;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 8px;
+  width: 800px;
+  margin-bottom: 4px;
+  height: 20px;
+}
+.rpt {
+  float: none;
+}
+.quicklinks {
+  background-color: #ffc;
+  border: 1px #000 solid;
+  position: absolute;
+  top: 200px;
+  left: 850px;
+  width: 200px;
+  margin-left: 4px;
+  padding-left: 4px;
+}
+.quicklinks h1 {
+  padding-left: 8px;
+}
+.quicklinks p {
+  padding-left: 12px;
+}
+.quicklinks a {
+  text-decoration: none;
+}
+.quicklinks hr {
+  width: 90%;
+}
+.lbl {
+  font: 12px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+.pspan {
+  position: relative;
+  left: 130px;
+}
+.hdetail {
+  font: 10px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+.hstrong {
+  font-weight: bold;
+}
+.createdte,
+#acctnum,
+.agentcont,
+.policynum,
+.inscreatedte,
+.inscontact,
+.morgcreatedte,
+.insacctnum,
+.inspolicynum,
+.morgcont,
+.morgacctnum,
+.morgpolicynum {
+  border: 0.5px solid #30f;
+}
+.lblcreatedte {
+  margin-left: 100px;
+  font-style: italic;
+}
+.pdetail {
+  align: top;
+  padding: 1 0 0 0;
+  margin: 0 0 0 0px;
+  height: 15px;
+}
+.hdetail2 {
+  text-align: top;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+.history-detail {
+  position: absolute;
+  width: 560px;
+  height: 400px;
+}
+div.bulk-user {
+  position: relative;
+  left: 50px;
+  top: 50px;
+  width: 400px;
+  height: 100px;
+  border: 1px dotted #000;
+  padding-left: 24px;
+  padding-top: 8px;
+  margin-bottom: 10px;
+}
+div.bulk-user p {
+  margin: 2px;
+}
+div.admin {
+  border: 0px solid #efeccc;
+  height: 700px;
+}
+div.imports,
+.useradd,
+float left {
+  margin-left: 20px;
+  margin-top: 10px;
+  border: 0px dotted #000;
+  width: 600px;
+  height: 600px;
+  display: none;
+}
+div.imports h1,
+.useradd h1,
+float left h1 {
+  margin-left: 24px;
+  margin-top: 20px;
+}
+.userlist {
+  float: left;
+  margin-left: 20px;
+  margin-top: 10px;
+  border: 0px dotted #000;
+  width: 700px;
+  height: 600px;
+  display: none;
+}
+.userlist h1 {
+  margin-left: 24px;
+  margin-top: 20px;
+}
+div.bulk-agents,
+.bulk-morgage,
+.bulk-insured {
+  position: relative;
+  left: 50px;
+  top: 50px;
+  width: 400px;
+  height: 100px;
+  border: 1px dotted #000;
+  padding-left: 24px;
+  padding-top: 8px;
+  margin-bottom: 10px;
+}
+div.bulk-agents p,
+.bulk-morgage p,
+.bulk-insured p {
+  margin: 2px;
+}
+div.user {
+  position: relative;
+  left: 50px;
+  top: 40px;
+  width: 400px;
+  height: 300px;
+  border: 1px dotted #000;
+  padding-left: 24px;
+  padding-top: 8px;
+  margin-bottom: 10px;
+}
+div.user p {
+  margin: 6px;
+}
+.error {
+  position: relative;
+  display: block;
+  color: #c03;
+  border: 2px solid #c03;
+  top: 20px;
+  left: 20px;
+  width: 300px;
+  height: 50px;
+  background-color: #f6f;
+  text-align: center;
+  padding-top: 0px;
+}
+.error p {
+  margin: 0px;
+}
+.error p:hover {
+  cursor: pointer;
+}
+.info {
+  position: relative;
+  display: block;
+  color: #369;
+  border: 2px solid #369;
+  top: 20px;
+  left: 20px;
+  width: 300px;
+  height: 50px;
+  background-color: #3cf;
+  text-align: center;
+  padding-top: 0px;
+}
+.info p {
+  margin: 0px;
+}
+.info p:hover {
+  cursor: pointer;
+}
+.updateuser {
+  display: none;
+}
+.object-display {
+  display: none;
+  border: 2px solid #00f;
+  border-radius: 4px;
+  position: absolute;
+  top: 150px;
+  left: 150px;
+  width: 600px;
+  height: 500px;
+  background-color: #fafafa;
+  font: 10px arial, sans-serif;
+  padding-right: 0px;
+  padding-left: 12px;
+}
+.object-display div {
+  width: 95%;
+  height: 100%;
+  border: 0px solid #000;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+.object-display a {
+  display: block;
+  float: right;
+  width: 30px;
+  height: 29px;
+  background: url("/images/close.png") no-repeat center center;
+}
+.object-display span {
+  padding-left: 4px;
+  padding-right: 8px;
+  padding-bottom: 2px;
+  padding-top: 2px;
+}
+.object-display #sp1 {
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-bottom: 2px;
+  padding-top: 2px;
+  font-style: italic;
+  font-weight: bold;
+}
+.object-display p {
+  margin-bottom: 0.5px;
+  border: 1px solid #e8e8e8;
+  border-radius: 4px;
+  background-color: #e8e8f9;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+.object-display .agenttab,
+.object-display .insurtab,
+.object-display .morgtab {
+  padding-right: 0px;
+  padding-left: 4px;
+  width: 560px;
+  height: 480px;
+  position: relative;
+  top: 10px;
+  left: 0px;
+}
+.object-display .updated {
+  display: inline;
+}
+.object-display .div-2,
+.object-display .div-2b,
+.object-display .div-2c {
+  border: 2px solid #00f;
+  border-radius: 4px;
+  position: absolute;
+  top: 100px;
+  left: 350px;
+  width: 200px;
+  height: 400px;
+  background-color: #fafafa;
+  font: 10px arial, sans-serif;
+  padding-right: 4px;
+  padding-left: 4px;
+  padding-top: 4px;
+}
+.message {
+  border: 1px solid #f2dede;
+  border-radius: 4px;
+  background-color: #f2dede;
+  color: #b94a48;
+  position: absolute;
+  top: 130px;
+  left: 300px;
+  width: 200px;
+  height: 24px;
+  text-align: center;
+  padding-top: 4px;
+  padding-left: 4px;
+  padding-right: 4px;
+  cursor: pointer;
+  display: none;
+}
+.message a {
+  display: block;
+  position: relative;
+  left: 160px;
+  top: -15px;
+  width: 30px;
+  background: url("/images/close.png") no-repeat center;
+}

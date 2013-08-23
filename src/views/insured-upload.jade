@@ -1,0 +1,34 @@
+doctype 5
+html
+  head
+    title= title
+    meta(http-equiv="Cache-Control",content="no-cache")
+    meta(http-equiv="pragma",content="no-cache")
+    meta(http-equiv="Expires",content="Mon,25 Jul 2011 11:12:01 GMT")
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+   block content
+    div
+     if typeof msg!= 'undefined'
+      div#error.error
+       P.pclose#pclose(style="text-align:right") X
+       P #{msg}
+     if typeof infomsg!= 'undefined'
+      div#info.info
+       P.pclose#pclose(style="text-align:right") X
+       P #{infomsg}
+     div.bulk-insured
+      p Import Insured
+      form.form-insured-upload(method="post",enctype="multipart/form-data",action="insured-upload")
+     
+       p
+        input(type="file",name="insfile",size="30")
+        input(type="submit",value="Upload")
+       p
+        
+         input#ftype(type="radio",name="ftype",value="backup",checked="checked")
+         | Import from Backup &nbsp;
+        
+         input#ftype(type="radio",name="ftype",value="csv")
+         | &nbsp;Import from csv &nbsp;
+ include footer

@@ -1,0 +1,36 @@
+doctype 5
+html
+  head
+    title= title
+    meta(http-equiv="Cache-Control",content="no-cache")
+    meta(http-equiv="pragma",content="no-cache")
+    meta(http-equiv="Expires",content="Mon,25 Jul 2011 11:12:01 GMT")
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css')
+
+   -var currDate = new Date();
+   -var currDateTime = currDate.toLocaleDateString()+' '+currDate.toLocaleTimeString()
+  body
+    h1= title
+    P 
+     span 
+     | Currently Logged in as #{user} &nbsp;&nbsp; #{currDateTime}
+    div.message#message
+     | Field required
+     a(href="#") &nbsp;
+    header
+      nav
+        ul.def-nav
+          li
+            a(href="/home") Home
+          li
+            a(href="/agents") Call center portal
+          li
+            a(href="javascript:window.open('/about','about','width=200,height=150');void(0);") About
+          li
+            a(href="/contact") Contact
+          li
+            a(href="/logout") logout
+          
+          
+    block content

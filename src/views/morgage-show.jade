@@ -1,0 +1,20 @@
+//morgage-show.jade
+
+block content
+  div.reporting
+   table.morgDtl 
+    tr
+     td.header morgage name
+     td.header acctnum 
+     td.header Status
+     td.header Call back
+     td.header User
+     td.header(colspan="2") Created on
+    tr.insureddetail
+       td #{morgDtl.morgagename}
+       td #{morgDtl.acctnum}
+       td #{morgDtl.issue}
+       td #{morgDtl.callbckdte}
+       td #{morgDtl.workedby}
+       td #{morgDtl.created_at}
+   

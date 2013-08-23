@@ -1,0 +1,64 @@
+//morgage-history.jade
+doctype 5
+html
+  head
+    title= title
+    meta(http-equiv="Cache-Control",content="no-cache")
+    meta(http-equiv="pragma",content="no-cache")
+    meta(http-equiv="Expires",content="Mon,25 Jul 2011 11:12:01 GMT")
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+  block content
+  div.history-detail
+   table.history
+    - if(historylist.length>0)
+     h1 #{historylist.length} results found
+     tr
+      td.hheader Account
+      td.hheader Policy 
+      td.hheader Brand
+      td.hheader Status
+      td.hheader User
+      td.hheader Created on
+
+     - each history in historylist
+      tr.historydetail
+       td.hdetail #{history.acctnum}
+       td.hdetail #{history.policynum}
+       td.hdetail #{history.brand}
+       td.hdetail #{history.issue}
+       td.hdetail #{history.workedby}
+       td.hdetail #{history.created_at}
+      tr.historydetail2
+       td.hdetail &nbsp;
+       td.hstrong Work completed Detail
+       td.hstrong(colspan="3") Comments
+      tr.historydetail2
+       td.hdetail2 &nbsp;
+       td.hdetail2
+        if history.workcomplete.phonepaymnts == 'on'
+         p.pdetail Phone payment:
+        if history.workcomplete.paystatreq =='on'
+         p.pdetail Payment Status:
+        if history.workcomplete.morgcalls=='on'
+          p.pdetail Morgage Call:
+        if history.workcomplete.eftquestions=='on'
+         p.pdetail EFT Question:
+        if history.workcomplete.endorsements=='on'
+         p.pdetail Endorsements:
+        if history.workcomplete.cancpolreq=='on'
+         p.pdetail Policy cancellation:
+        if history.workcomplete.reinst=='on'
+         p.pdetail Policy reinstated: 
+        if history.workcomplete.pifdscnt=='on'
+         p.pdetail PIF discount: 
+        if history.workcomplete.pymntagrreqs=='on'
+         p.pdetail Payment arrangement:
+        if history.workcomplete.audspreadreq=='on'
+         p.pdetail Audit requests:
+        p.pdetail Escalated to:&nbsp;#{history.escato}
+        p.pdetail Callback date:&nbsp; #{history.callbkdte} 
+       td.hdetail2(colspan="4",style="width:250px") #{history.comments} &nbsp;
+       td.hdetail2
+    - else
+     h1 0 results found

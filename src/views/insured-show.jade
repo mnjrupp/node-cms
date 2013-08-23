@@ -1,0 +1,20 @@
+//insured-show.jade
+
+block content
+  div.reporting
+   table.insured 
+    tr
+     td.header First
+     td.header Last 
+     td.header Status
+     td.header Call back
+     td.header User
+     td.header(colspan="2") Created on
+    tr.insureddetail
+       td #{insured.insuredlname}
+       td #{insured.insuredfname}
+       td #{insured.issue}
+       td #{insured.callbckdte}
+       td #{insured.workedby}
+       td #{insured.created_at}
+   

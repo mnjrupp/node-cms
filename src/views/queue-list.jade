@@ -1,0 +1,42 @@
+
+div.queuelist
+  div.qagents
+   table.agents 
+    h1.rpt Queue list
+    tr
+     td.qheader Type
+     td.qheader Call back
+     td.qheader User
+     td.qheader(colspan="2") Created on
+    if(agents)
+     - each agent in agents
+      - var _aStr = JSON.stringify(agent)
+      tr.agentdetail
+       td Agent
+       td #{agent.callbkdte}
+       td #{agent.workedby}
+       td #{agent.created_at}
+       td
+        a.aview(href="javascript:update_qagent(#{_aStr});") edit
+  
+    if (insurers)
+     - each insurer in insurers
+      - var _aStr = JSON.stringify(insurer)
+      tr.insureddetail
+       td Insurer
+       td #{insurer.callbkdte}
+       td #{insurer.workedby}
+       td #{insurer.created_at}
+       td
+        a.aview(href="javascript:update_qinsurer(#{_aStr});") edit
+ 
+    if(morgages)
+     - each morgage in morgages
+      - var _aStr = JSON.stringify(morgage)
+      tr.morgdetail
+       td Morg-holder
+       td #{morgage.callbkdte}
+       td #{morgage.workedby}
+       td #{morgage.created_at}
+       td
+        a.aview(href="javascript:update_qmorg(#{_aStr});") edit

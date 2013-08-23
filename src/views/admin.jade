@@ -1,0 +1,145 @@
+//index-sub.jade
+extends layout
+
+block content
+ div.maintab
+  ul#nav
+   li
+    a(href="/agents") Agents
+   li.insur
+    strong
+     a(href="/agents#") Insured
+   li.morgage
+    a(href="/agents#") Morgage Holder
+   if security==9
+   li
+    a(href="/reporting") Reporting
+   li.cur 
+    a(href="/admin") Admin
+   li#queue
+     a(href="/queue") Queue
+   - var space = '&nbsp;'
+  div.admin
+   if typeof msg!= 'undefined'
+    div#error.error
+     P.pclose#pclose(style="text-align:right") X
+     P #{msg}
+   if typeof infomsg!= 'undefined'
+    div#info.info
+     P.pclose#pclose(style="text-align:right") X
+     P #{infomsg}
+   div.imports#imports
+    div.bulk-user
+     p Import Users/Security
+       button#users.users(type="button",value="Upload",onClick="javascript:window.open('/user-upload','users','scrollbars=1,width=600,height=400');void(0);")
+        | Import
+    div.bulk-agents
+     p Import Agents
+     form.form-user-upload(method="post",enctype="multipart/form-data",action="agent-upload")
+     
+      p 
+       label(for="bulkagentpass") Password:
+        input.bulkagentpass(type="password",name="password")
+      p
+       input(type="file",name="agentfile",size="30")
+       input(type="submit",value="Upload")
+    div.bulk-insured
+     p Import Insured
+     form.form-insured-upload(method="post",enctype="multipart/form-data",action="insured-upload")
+     
+      p 
+       label(for="bulkinspass") Password:
+        input.bulkinspass(type="password",name="password")
+      p
+       input(type="file",name="insfile",size="30")
+       input(type="submit",value="Upload")
+    div.bulk-morgage
+     p Import Morgage Holders
+     form.form-morgage-upload(method="post",enctype="multipart/form-data",action="morgage-upload")
+     
+      p 
+       label(for="bulkmorgpass") Password:
+        input.bulkmorgpass(type="password",name="password")
+      p
+       input(type="file",name="morgfile",size="30")
+       input(type="submit",value="Upload")
+  
+   div.useradd
+    h1 Add - Edit User
+    div.user
+     
+     form.form-user(method="post",action="/user")
+      p
+       label(for="loginid") Login:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        input.loginid(type="text",size="10",name="loginid")
+        input.user_id(type="hidden",name="user_id")
+       label(for="seclevel") &nbsp;Security: &nbsp;
+        select#seclevel.seclevel(name="seclevel",size="1")
+         option(value="") 
+         option(value="0") user
+         option(value="1") user email
+         option(value="2") user chat
+         option(value="8") queue
+         option(value="9") admin
+      p
+       label(for="fname") First Name: &nbsp;
+        input.fname(type="text",size="20",name="fname")
+      P
+       label(for="lname") Last Name: &nbsp;
+        input.lname(type="text",size="20",name="lname")
+      p
+       label(for="email") Email: !{space}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        input.email(type="text",size="30",name="email")
+      p
+       label(for="pass") Password: !{space} 
+        input.pass(type="password",name="pass")
+       label(for="status") !{space} Status: !{space}
+        select.status(name="status",size="1")
+         option(value="1") enabled
+         option(value="0") disabled
+      p !{space}
+      p
+       |!{space}
+       |!{space}
+       input.usersubmitted#usersubmitted(type="submit",value="submit")
+       |!{space}
+       |!{space}
+       button.updateuser(onClick="javascript:submitUpdate('form-user');",type="button") Update
+       |!{space}
+       |!{space}
+       button.canceled(type="reset") Reset
+    if typeof divVisible !='undefined'
+      script
+        jQuery('div.useradd').show();
+   div.userlist
+    table.users
+     h1 User list
+     tr
+      td.header First name
+      td.header Last name
+      td.header Email
+      td.header Login
+      td.header Create Date
+      td.header Security
+      td.header Status
+      td.header Edit
+     - each user in users
+      - var _aStr = JSON.stringify(user)
+      tr.userdetail
+       td.user-fname #{user.fname}
+       td.user-lname #{user.lname}
+       td.user-email #{user.email}
+       td.user-user #{user.user}
+       td.user-created_at #{user.created_at}
+       td.user-seclevel #{user.seclevel}
+        input.user-status(type="hidden",value=user.status,name="user-status")
+        input.user-id(type="hidden",value=user._id,name="user_id")
+       if(user.status==0)
+        td disabled
+       else
+        td enabled
+       
+       td 
+        a.useredit(href="javascript:update_user(#{_aStr});") edit
+  include quick-links-admin
+  include footer

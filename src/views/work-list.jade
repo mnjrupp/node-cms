@@ -1,0 +1,33 @@
+//work-list.jade
+div.worklist
+ div.agentsdiv
+  
+   | Work-list
+  p.titlenav Agents
+   img.navimg(src="/images/up.png")
+  div.heading
+   #agents
+    - each agent in agents
+     - var _aStr = JSON.stringify(agent)
+     - if(agent.issue=='open')
+      p.agent
+       a.agent(href="javascript:update_worklist_Id(#{_aStr});")!= agent.agentnum+" "+agent.agentname+" "+agent.created_at
+ div.insureddiv
+  p.titlenav Insurers
+   img.navimg(src="/images/down.png")
+  div.heading
+   - each insurer in insurers
+     - var _aStr = JSON.stringify(insurer)
+     - if(insurer.issue=='open')
+      p.insurer
+       a.insurer(href="javascript:update_insworklist(#{_aStr});")!= insurer.insuredlname+" "+insurer.insuredfname+" "+insurer.created_at
+ div.morgdiv
+  p.titlenav Morgage Holder
+   img.navimg(src="/images/down.png")
+  div.heading
+  - if (morgages)
+   - each morgage in morgages
+    - var _aStr = JSON.stringify(morgage)
+    - if(morgage.issue=='open')
+     p.pmorg
+      a.morgage(href="javascript:update_morgworklist(#{_aStr});")!= morgage.morgagename+" "+morgage.acctnum+" "+morgage.created_at

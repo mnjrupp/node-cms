@@ -1,0 +1,22 @@
+//work-list.jade
+div.quicklinks
+  h1 Quick Links
+  p
+   a(href="/reporting/select=open") Open Work
+  p
+   a(href="/reporting/select=resolved") Resolved Work
+  P
+   a(href="/reporting/select=escalated") Escalated Work
+  p
+   a(href="/reporting/custom=new") Custom Report
+  hr
+  p My Reports
+
+  div.toggled
+   
+   if(typeof(reports)!='undefined')
+     - each report in reports
+      - var strjs = JSON.stringify(report)
+      p(style="margin-left:15px;")
+       a#ballon.ballon(href="/reporting/custom/"+report._id,title=strjs) #{report.rptname}
+   else

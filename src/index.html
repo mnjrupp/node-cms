@@ -1,0 +1,67 @@
+<html>
+<head>
+
+</head>
+<body>
+<div>
+ <div  id="room-content" style="top:20px;left:50px;width:400px;height:400px;border:1px solid blue"></div>
+    <input type="button" value="connect" id="room-connect" class="connect"/></br>
+	<form id="room-form" name="room-form">
+	<select id="room-select" size=1">
+	<option value="first room">first room</option>
+	<option value="second room">second room</option>
+	<option value="third room">third room</option>
+	</select>&nbsp;
+	<button type="button" id="room-join">Join</button>
+	<input type="text" id="room-text" />&nbsp;
+    <input type="submit" value="submit" />
+	</form>
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+ <script>
+  
+// Room Event Example
+$(document).ready(function(){
+  $('#room-connect').click(function() {
+    $(this).unbind('click');
+    var joined = false;
+    var room = io.connect('http://localhost:3001/room');
+    var content = $('#room-content');
+    room.on('connect', function() {
+      $('#room-form').css('display', 'block');
+      content.append($('<p>').text('Connected'));
+    }); 
+    
+    room.on('joined', function(msg) {
+      content.append($('<p>').text(msg).append($('<em>').text(' from server')));
+      content.scrollTop(content.height());
+    });
+    
+    room.on('message', function(msg) {
+      content.append($('<p>').text(msg).append($('<em>').text(' from server')));
+      content.scrollTop(content.height());
+    });
+    
+    $('#room-join').click(function(e) {
+      joined = true;
+      room.emit('join room', $('#room-select').val());
+    });
+    
+    $('#room-form').submit(function(e) {
+      e.preventDefault();
+      var textObj = $('#room-text');
+      var msg = textObj.val();
+      if (msg !== '') {
+        textObj.val('');
+        content.append($('<p>').text(msg).append($('<em>').text(' from me')));
+        content.scrollTop(content.height());
+        room.emit('fromclient', msg);
+      }
+    });
+  }); 
+ }); 
+
+ </script>
+</body>
+

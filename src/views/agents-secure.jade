@@ -1,0 +1,128 @@
+//index-sub.jade
+extends layout
+
+block content
+ div.maintab
+  ul#nav
+   li.cur
+    a(href="/agents") Agents
+   li
+    strong
+     a(href="/insured") Insured
+   li
+    a(href="/morg-holder") Morgage Holder
+   li
+    a(href="/agents") Place holder1
+   li 
+    a(href="/agents") Place holder2
+  div.agenttab
+   form.form1a(method="post")
+    div.div-1
+     
+     P
+      label(for="acctnum") Account:
+       input#acctnum(type="text",name="acctnum")
+       input#_id._id(type="hidden",name="_id",value="")
+      label(for="brand") Brand:
+       select#brand(name="brand",size="1")
+        option(value="")
+        option(value="Agri") Agri
+        option(value="FUI") FUI
+        option(value="GC") GC
+        option(value="NP") NP
+        option(value="SR") SR
+        option(value="UNI") UNI
+     P
+      label(for="agentnum") Agent#:
+       input#agentnum(type="text",name="agentnum",size="5")
+      label(for="agentname") Agent:
+       input#agentname(type="text",name="agentname")
+      label(for="agentphone") Phone:
+       input#agentphone(type="text",name="agentphone")
+     P
+      label(for="addrstreet") Address:
+       input#addrstreet(type="text",name="addrstreet")
+      label(for="addrcity") City:
+       input#addrcity(type="text",name="addrcity")
+      label(for="addrstate") State:
+       input#addrstate(type="text",name="addrstate",size="3")
+      label(for="addrzip") Zip:
+       input#addrzip(type="text",name="addrzip",size="6")
+     p
+      label(for="agentcontact") Contact:
+       input#agentcont(type="text",name="agentcontact")
+      label(for="callnum") Contact phone#
+       input#callnum(type="text",name="callnum")
+      
+     P
+      |Status of Issue
+     P
+      input#issue(type="radio",value="resolved",name="issue")
+      |Resolved
+      input#issue(type="radio",value="open",name="issue")
+      |Open
+      input#issue(type="radio",value="escalated",name="issue")
+      |Escalated
+      - var space = "&nbsp;&nbsp;&nbsp;&nbsp;"
+      |!{space}
+      |!{space}
+      input.submitted#submitted(type="submit",value="submit")
+      |!{space}
+      |!{space}
+      button.updated#updated(onClick="javascript:submitUpdate();",type="button") Update
+      |!{space}
+      |!{space}
+      button.canceled(type="reset") Reset
+     P.cmnt
+      label(for="agentcomment") Comment area:
+     P.cmnt
+       textarea#agentcomment(name="agentcomment",rows="6",cols="50") 
+    div.div-2
+     p.pheader  !{space}
+     p 
+      |!{space}
+      |Work Completed;check all that applies
+     p
+      input#initcall(type="checkbox",name="initcall",checked=false)
+      |First Call
+     p
+      //phonepaymnts:'No',paystatreq:'No',morgcalls:'No',eftquestions:'No',
+      //  endorsements:'No',cancpolreq:'No',reinst:'No',pifdscnt:'No',pymntagrreqs:'No',audspreadreq:'No',misc:'No'
+     p 
+       input#phonepaymnts(type="checkbox",checked=false,name="phonepaymnts")
+       | Phone payments 
+     p 
+       input#paystatreq(type="checkbox",checked=false,name="paystatreq")
+       | Payment Status request
+     p 
+       input#morgcalls(type="checkbox",checked=false,name="morgcalls")
+       Mortgage Calls/Issues
+     p 
+       input#eftquestions(type="checkbox",checked=false,name="eftquestions")
+       |EFT Questions
+     p 
+       input#endorsements(type="checkbox",checked=false,name="endorsements")
+       |Endorsements(explain/ratings)
+     p 
+       input#cancpolreq(type="checkbox",checked=false,name="cancpolreq")
+       |Cancelled Policy requests
+     p 
+       input#reinst(type="checkbox",checked=false,name="reinst")
+       |Reinstatement considered
+     p 
+       input#pifdscnt(type="checkbox",checked=false,name="pifdscnt")
+       | Pif Discounts
+     p 
+       input#pymntagrreqs(type="checkbox",checked=false,name="pymntagrreqs")
+       |Payment Agreement/Redistribute
+     p 
+       input#audspreadreq(type="checkbox",checked=false,name="audspreadreq")
+       |Audit Spread Requests
+     p 
+       input#misc(type="checkbox",checked=false,name="misc")
+       |Misc
+     p.pfooter
+      |!{space}
+  include work-list
+  
+   

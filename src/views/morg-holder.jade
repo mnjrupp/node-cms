@@ -1,0 +1,20 @@
+//index-sub.jade
+extends layout
+
+block content
+ div.maintab
+  ul#nav
+   li
+    a(href="/agents") Agents
+   li
+    
+     a(href="/insured") Insured
+   li.cur
+    strong
+     a(href="/morg-holder") Morgage Holder
+   if security==9
+   li
+    a(href="/reporting") Reporting
+   li 
+    a(href="/admin") Admin
+ include work-list

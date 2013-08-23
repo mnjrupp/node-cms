@@ -1,0 +1,25 @@
+//agent-show.jade
+doctype 5
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+  block content
+   div
+    table.agentDtl 
+     tr
+      td.hheader agentnum
+      td.hheader agentname 
+      td.hheader Status
+      td.hheader Call back
+      td.hheader User
+      td.hheader(colspan="2") Created on
+     tr.insureddetail
+       td #{agentDtl.agentnum}
+       td #{agentDtl.agentname}
+       td #{agentDtl.issue}
+       td #{agentDtl.callbckdte}
+       td #{agentDtl.workedby}
+       td #{agentDtl.created_at}
+   
