@@ -21,7 +21,7 @@ Simple  Contact Management System for call center tracking
       4) Use favorite browser go to "http://localhost:3000"
       5) login using username:admin, password:lollipop%&1
  ..      
-      
-      TODO
+ Screen shots of app can be seen in the
+     [Wiki](https://github.com/mnjrupp/node-cms/wiki)
     
-        More to come...
+        
