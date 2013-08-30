@@ -50,6 +50,7 @@ Simple  Contact Management System for call center tracking
       Client side libraries used.
        JQuery
        Socket IO
+       Twitter bootstrap
  Screen shots of app can be seen in the
      [Wiki](https://github.com/mnjrupp/node-cms/wiki)
     
