@@ -37,7 +37,8 @@ Simple  Contact Management System for call center tracking
        
        To help in data persistance, it is using the cron for nodejs to schedule a flat file backup
        that can be used to import saved objects after a disaster into.
-       The code to implement cron back-up is located in the app-cms-sio-memory.js file and is commented out by default.
+       The code to implement cron back-up is located in the app-cms-sio-memory.js file
+        and is commented out by default.
        You will have to uncomment the following.
        ----------------------------------------
         var concron = new cronJob('00 00,07,10,20,30,35,40,45,50 * * * *', function(){
