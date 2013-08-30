@@ -20,6 +20,11 @@ Simple  Contact Management System for call center tracking
       3) From cmd prompt in directory "node app-cms-sio-memory"
       4) Use favorite browser go to "http://localhost:3000"
       5) login using username:admin, password:lollipop%&1
+      NOTE: When not using on your local machine, it will be neccessary to 
+      change .\views\mainframe.jade so that SocketIO is pointing to the server where the app is hosted.
+      line 14
+        script
+         var socket=io.connect('http://localhost:3000');
  .. 
  
       Data Persistance
