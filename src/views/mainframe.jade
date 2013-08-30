@@ -12,7 +12,7 @@ html
     
     
     script
-     var socket=io.connect('http://qbe-31cwhq1:3000'); 
+     var socket=io.connect('http://localhost:3000'); 
       
        socket.on('queue',function(msg){
          var n=noty({text: msg,type:'information',dismissQueue:true,layout:'bottomRight',theme: 'defaultTheme'});

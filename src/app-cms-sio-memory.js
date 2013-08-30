@@ -60,7 +60,6 @@ var Router = require('./routes/router')
 });*/
 
 /*var concron = new cronJob('00 00,07,10,20,30,35,40,45,50 * * * *', function(){
-    console.log(new Date());
   r.dumpMemoryArrays(function(e,o){
 	});
 }, null, true);*/

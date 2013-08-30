@@ -1,6 +1,6 @@
 
    var AgentProvider = require('../agentprovider-memory').AgentProvider
-	,InsuredProvider = require('../insured-provider-memory.js').insuredProvider
+	,InsuredProvider = require('../insured-provider-memory').insuredProvider
 	,MorgageProvider = require('../morgage-provider-memory').morgageProvider
 	,RptProvider     = require('../report-provider-memory').ReportProvider
 	//,CT = require('../public/javascripts/modules/country-list')
